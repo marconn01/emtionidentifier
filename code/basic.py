@@ -24,5 +24,5 @@ while True:
     cv.imshow('frame',cvtd)
     if cv.waitKey(1)==ord('q'):
         break
-
+print("PIPI THE GREAT")
 cv.destroyAllWindows
