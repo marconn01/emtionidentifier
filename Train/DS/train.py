@@ -3,6 +3,7 @@ import os
 from skimage.feature import hog
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import csv
 
 
 def extract_hog_features(image_path):
@@ -18,7 +19,7 @@ def extract_hog_features(image_path):
     return hog_features
 
 
-main_folder = 'emtionidentifier\Train\DS'
+main_folder = 'Train\DS'
 
 features = []
 labels = []
@@ -47,5 +48,11 @@ labels = np.array(labels)
 scaler = StandardScaler()
 normalized_features = scaler.fit_transform(features)
 
-print('Shape of feature matrix:', normalized_features.shape)
-print('Shape of labels:', labels.shape)
+data = np.hstack((features, np.reshape(labels, (-1, 1))))
+# save data in csv fiel
+with open('Train\DS\hog_features.csv', 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+
+# print('Shape of feature matrix:', features)
+# print('Shape of labels:', labels)
